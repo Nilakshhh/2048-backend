@@ -14,6 +14,9 @@ const uri = "mongodb+srv://dnilaksh05:0s8v4fz0WC4XBoPx@cluster0.mabu795.mongodb.
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true }
 );
 const connection = mongoose.connection;
+connection.on('error', (error) => {
+  console.error('MongoDB connection error:', error);
+});
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 })
