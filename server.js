@@ -17,7 +17,9 @@ const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 })
-
+app.get('/', (req, res) => {
+  res.send('Hey this is my API running 🥳')
+})
 //const exercisesRouter = require('./routes/exercises');
 const usersRouter = require('./routes/user');
 
