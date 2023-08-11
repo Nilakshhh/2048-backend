@@ -11,8 +11,8 @@ app.use(cors());
 app.use(express.json());
 
 const uri = "mongodb+srv://dnilaksh05:0s8v4fz0WC4XBoPx@cluster0.mabu795.mongodb.net/?retryWrites=true&w=majority";
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true }
-);
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+
 const connection = mongoose.connection;
 connection.on('error', (error) => {
   console.error('MongoDB connection error:', error);
