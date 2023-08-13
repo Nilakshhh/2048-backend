@@ -30,5 +30,19 @@ router.route('/register').post((req, res) => {
     }
   })
 });
+router.route('/login').post((req, res) => {
+  User.findOne({ username: req.body.username }).then(user => {
+      if(!user){
+        return res.status(400).json({success : false, username : "Username not found" });
+      } else {
+      if(user.password != req.body.password){
+        return res.status(400).json({success : false, password : "password does not match" });
+      }
+      else{
+        res.json({success : true, token: user.username});
+      }  
+    }
+  })
+});
 
 module.exports = router;

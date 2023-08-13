@@ -23,10 +23,9 @@ connection.once('open', () => {
 app.get('/', (req, res) => {
   res.send('Hey this is my API running 🥳')
 })
-//const exercisesRouter = require('./routes/exercises');
+
 const usersRouter = require('./routes/user');
 
-//app.use('/exercises', exercisesRouter);
 app.use('/users', usersRouter);
 
 app.listen(port, () => {
