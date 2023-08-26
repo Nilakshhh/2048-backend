@@ -45,4 +45,22 @@ router.route('/login').post((req, res) => {
   })
 });
 
+router.route('/score').post((req, res) => {
+  const username = req.body.username;
+  const newHighscore = req.body.highscore;
+
+  User.findOneAndUpdate(
+    { username: username },
+    { highscore: newHighscore },
+    { new: true }
+  )
+  .then(updatedUser => {
+    if (!updatedUser) {
+      return res.status(400).json({ username: "User not found" });
+    }
+    res.json({ success: true, newHighscore: updatedUser.highscore });
+  })
+  .catch(err => res.status(400).json('Error: ' + err));
+});
+
 module.exports = router;
