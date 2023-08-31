@@ -9,6 +9,15 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/top').get(async (req, res) => {
+  try {
+    const sortedUsers = await User.find({}, 'username highscore', { sort: { highscore: -1 }, limit: 5 });
+    return res.json(sortedUsers);
+  } catch (error) {
+    return res.status(500).json({ error: 'Server error' });
+  }
+});
+
 router.route('/register').post((req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
   if (!isValid) {
